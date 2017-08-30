@@ -1,0 +1,73 @@
+<p>
+  <strong>First Name:</strong>
+  <%= @serviceMan.fName %>
+</p>
+ 
+<p>
+  <strong>Last Name:</strong>
+  <%= @serviceMan.lName %>
+</p>
+<p>
+  <strong>Age:</strong>
+  <%= @serviceMan.age%>
+</p>
+<p>
+  <strong>Contact1:</strong>
+  <%= @serviceMan.contact1 %>
+</p>
+<p>
+  <strong>Contact2:</strong>
+  <%= @serviceMan.contact2 %>
+</p>
+<p>
+  <strong>Address:</strong>
+  <%= @serviceMan.address%>
+</p>
+<p>
+  <strong>Zip Code:</strong>
+  <%= @serviceMan.zipcode%>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @serviceMan.city%>
+</p>
+<p>
+  <strong>State:</strong>
+  <%= @serviceMan.state%>
+</p>
+<p>
+  <strong>Country:</strong>
+  <%= @serviceMan.country%>
+</p> 
+
+<div id="map"></div>
+<!-- Script for Map-->
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIioyDVG6q9NO3_1xpMEruSUAE7xu9Nto&callback=initMap">
+    </script>
+<style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+
+    <h3>Location Of Service-Man</h3>
+    <script>
+  function initMap() {
+    var lati = <%= @serviceMan.latitude %>
+    var longi = <%= @serviceMan.longitude %>
+    var uluru = {lat: lati, lng: longi};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 8,
+      center: uluru
+    });
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+  }
+</script>
+<!--map End-->
+<%= link_to 'Back', service_men_path %>
+<%= link_to 'find_location', find_nearby_location_service_man_path(@serviceMan) %>
